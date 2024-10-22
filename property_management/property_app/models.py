@@ -32,24 +32,3 @@ class Unit(models.Model):
     def __str__(self):
          return f'{self.property.name} - Unit {self.unit_number}'
 
-# Tenant model
-
-class Tenant (models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15)
-    
-    def __str__(self):
-        return self.name
-    
-# Lease Model
-
-class Lease(models.Model):
-    tenant = models.ForeignKey(Tenant,on_delete= models.CASCADE)
-    unit = models.ForeignKey(Unit,on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    rent_Ammount = models.DecimalField(max_digits=8,decimal_places=2)
-    def __str__(self):
-        return f'Lease for {self.tenant.name} - Unit {self.unit.unit_number}'
-
